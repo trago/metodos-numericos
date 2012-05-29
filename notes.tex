@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage[dvips]{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\title{Metodos numericos}
+\author{Julio C. Estrada}
+
+\begin{document}
+\maketitle
+
+\section{Conceptos b\'asicos}
+\subsection{Derivada}
+La derivada de una funcion $f(x)$ continua es definida de la siguiente
+manera:
+\begin{equation}
+  f(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}=f'(x)=\frac{dx}{dy},
+\end{equation}
+suponiendo que el l\'imite existe. Otras formas de expresar la
+derivada:
+\begin{equation}
+  \frac{dx}{dy}=\lim_{\Delta x\to 0}\frac{\Delta y}{\Delta x}\quad
+  \text{\'o}
+  \quad \frac{dy}{dx}_{x=x_0}=f'(x_0)=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}
+\end{equation}
+
+\subsection{Teorema fundamental del calculo}
+Sea $F(x)$ una funcion continua en el intervalo $(a,b)$ tal que
+$\frac{dF(x)}{dx}=f(x)$. La funcion $f(x)$ es una funcion continua
+tambien dentro del intervalo $(a,b)$. Ahora divdiamos el intervalo en
+$n$ subintervalos de tama\~no $\Delta x=\frac{b-a}{n}$. Tomando
+$a=x_0$ y $b=x_n$, el intervalo quedaria partido en $n$ subintervalos
+cuys posiciones $i$-esima seria $x_i=x_0+i\Delta x$ para
+$i=0,1,2,\dots,n$. Ahora digamos que el valor $c_i$ es un valor dentro
+del intervalo $[x_{i-1},x_i]$ y formemos la siguiente suma
+\begin{equation}
+  S_n=\sum_{i=0}^{n}f(c_i)\Delta x
+\end{equation}
+El \emph{Teorema fundamental del calculo} nos dice que
+\begin{equation}
+\lim_{n\to \infty}S_n=\lim_{n\to \infty}\sum_{i=0}^{n}f(c_i)\Delta x =
+\int_a^bf(x)dx
+= \left. F(x)\right]_a^b=F(b)-F(a)
+\end{equation}
+Si $G(x)=\int_a^xf(t)dt$, entonces $\frac{dG(x)}{dx}=f(x)$
+
+\subsection{Series de Taylor}
+Una funcion $f(x)$ se dice que es anal\'itica en la vecindad de
+$x=x_0$ si puede ser representada como una serie de potencias
+convergente de la siguiente manera:
+\begin{equation}\label{eq:taylor}
+\begin{split}
+f(x)&=f(x_0)+f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2+\cdots +
+\frac{f^{(m)}(x_0)}{m!}(x-x_0)^m + \cdots \\
+ &=\sum_{n=0}^{\infty}\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n
+\end{split}
+\end{equation}
+Aqui suponemos que la funcion tiene derivadas continuas en todos los
+ordenes que puede ser evaluado el punto $x_0$. A la
+Ec. \ref{eq:taylor} le llamamos serie de Taylor. Otras maneras de
+expresar la serie de Taylor son las siguientes:
+\begin{equation}
+\begin{split}
+f(x_0+h) &= f(x_0) + f'(x_0)h + f''(x_0)\frac{h^2}{2!}+ \cdots +
+f^{m}(x_0)\frac{h^m}{m!} + \cdots \\
+  &=\sum_{n=0}^{\infty}f^{(n)}(x_0)\frac{h^n}{n!}
+\end{split}
+\end{equation}
+
+Algunas expanciones en series de taylor son las siguientes:
+\begin{equation}
+\begin{split}
+e^x &=1+x+\frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} +\cdots\\
+\sin x &=x - \frac{x^3}{3!}+ \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots\\
+\cos x &=1-\frac{x^2}{2!} + \frac{x^4}{4!} + \frac{x^6}{6!} + \cdots
+\end{split}\nonumber
+\end{equation}
+La serie de Taylor truncada es expresada de la siguiente manera:
+\begin{equation}
+f(x) = =f(x_0)+f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2+\cdots +
+\frac{f^{(m)}(x_0)}{m!}(x-x_0)^m + Error
+\end{equation}
+donde el error viene dado por
+\begin{equation}
+Error = \frac{f^{(m+1)}(\xi)}{(m+1)!}(x-x_0)^{m+1},\quad x_0<\xi<x
+\end{equation}
+Decimos que una funcion $f(x)$ tiene una raiz de multiplicidad $m$ si
+\begin{equation}
+f(x_0)=f'(x_0)=f''(x_0)=\cdots = f^{(m-1)}(x_0)=0
+\end{equation}
+Y su serie de Taylor queda de la siguiente manera:
+\begin{equation}
+f(x_0+h)=f^{(m)}(x_0)\frac{h}{m!}+f^{m+1}(x_0)\frac{h^{m+1}}{(m+1)!}+\cdots
+\end{equation}
+
+\subsection{El simbolo Landau $\mathcal O$}
+El simbolo Landau $\mathcal O$ es usado para comparar el
+comportamiento de una funcion $f(h)$ con otra $g(h)$ cuando $h\to
+0$. Decimos que 
+\begin{equation}
+f(h)=\mathcal{O}(g(h))\quad \text{si}\quad |f(h)|\leq C|g(h)|,
+\end{equation}
+donde $C$ es una constante positiva, para toda $h$ suficientemente
+pequeña tal que
+\[
+\lim_{h\to 0}\frac{|f(h)|}{|g(h)|}<C<\infty
+\]
+Por ejemplo, uno puede escribir la expansion del seno de la siguiente
+manera:
+\[
+\begin{split}
+\sin x=x-\frac{x^3}{3!}+ \mathcal{O}(x^5)\\
+\sin x-x+\frac{x^3}{3!}=\mathcal{O}(x^5)
+\end{split}
+\]
+
+\end{document}
